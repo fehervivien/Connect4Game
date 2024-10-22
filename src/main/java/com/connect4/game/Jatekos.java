@@ -1,4 +1,4 @@
-package com.connect4;
+package com.connect4.game;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -18,27 +18,30 @@ illetve a játékosok lépéseit.
     ki az oszlopot, ahová a lépést megteszi.
 */
 
-
 public abstract class Jatekos {
-    /* A játékos jelölése ('X' vagy 'O'), amelyet
-    a tábla megjelenít.*/    
+    /*
+     * A játékos jelölése ('X' vagy 'O'), amelyet
+     * a tábla megjelenít.
+     */
     protected char jel;
 
-        /* A konstruktor beállítja a játékos
-        karakterét */
-        public Jatekos(char jel) {
-            this.jel = jel;
-        }
+    /*
+     * A konstruktor beállítja a játékos
+     * karakterét
+     */
+    public Jatekos(char jel) {
+        this.jel = jel;
+    }
 
-        /* Minden játékos számára egyedi lesz,
-        és felelős a lépésért. Mivel absztrakt,
-        minden alosztályban implementálni kell.*/
-        public abstract int lepes(Tabla tabla);
+    /*
+     * Minden játékos számára egyedi lesz,
+     * és felelős a lépésért. Mivel absztrakt,
+     * minden alosztályban implementálni kell.
+     */
+    public abstract int lepes(Tabla tabla);
 
-        /*Visszaadja a játékos karakterét.*/
-        public char getJel() {
-            return jel;
-        }
+    /* Visszaadja a játékos karakterét. */
+    public char getJel() {
+        return jel;
+    }
 }
-
-

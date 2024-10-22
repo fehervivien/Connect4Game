@@ -1,4 +1,4 @@
-package com.connect4;
+package com.connect4.highscore;
 
 import java.io.*;
 import java.util.ArrayList;

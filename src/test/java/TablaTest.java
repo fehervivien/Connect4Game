@@ -1,6 +1,7 @@
-import com.connect4.Tabla;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.connect4.game.Tabla;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

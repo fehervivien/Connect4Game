@@ -1,7 +1,7 @@
-import com.connect4.Ember;
-import com.connect4.Gep;
-import com.connect4.Jatekos;
-import com.connect4.Tabla;
+import com.connect4.game.Ember;
+import com.connect4.game.Gep;
+import com.connect4.game.Jatekos;
+import com.connect4.game.Tabla;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

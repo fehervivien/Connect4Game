@@ -1,7 +1,8 @@
-import com.connect4.PalyaOlvasKiir;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.connect4.game.Palya;
 
 import java.io.*;
 
@@ -9,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PalyaOlvasKiirTest {
 
-    private PalyaOlvasKiir palyaOlvasKiir;
+    private Palya palyaOlvasKiir;
     private final String testFilePath = "testBoard.txt";
 
     @BeforeEach
     public void setUp() {
         // Inicializáljuk a PalyaOlvasKiir osztályt, üres táblával
-        palyaOlvasKiir = new PalyaOlvasKiir();
+        palyaOlvasKiir = new Palya();
     }
 
     @AfterEach

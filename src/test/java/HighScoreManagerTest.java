@@ -1,5 +1,6 @@
-import com.connect4.HighScore;
-import com.connect4.HighScoreManager;
+import com.connect4.highscore.HighScore;
+import com.connect4.highscore.HighScoreManager;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

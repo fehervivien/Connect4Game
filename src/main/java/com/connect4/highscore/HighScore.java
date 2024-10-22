@@ -1,4 +1,4 @@
-package com.connect4;
+package com.connect4.highscore;
 
 /* HighScore osztály:
 - Tárolja a játékos nevét és pontszámát.

@@ -1,4 +1,4 @@
-package com.connect4;
+package com.connect4.game;
 
 /* TablaKezelo osztály:
 Egy egyszerű modellje a játékosoknak, amely tárolja
@@ -8,7 +8,7 @@ lehetővé teszi a játékosok azonosítását
 
 public class TablaKezelo {
     private String nev; // Játékos neve
-    private char karakter; // X vagy O
+    private char karakter; // S vagy P
 
     /* Ez a konstruktor felelős az osztály példányának
     létrehozásáért */
