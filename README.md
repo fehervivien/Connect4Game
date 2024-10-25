@@ -1,4 +1,4 @@
-Connect4-Game java fejlesztésű parancssoros játék.
+Connect4Game java fejlesztésű parancssoros játék.
 
 Feladatleírása (Egyetem projekt):
 Connect 4 parancssoros játék implementáció
