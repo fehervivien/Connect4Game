@@ -1,61 +1,68 @@
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.connect4.game.GameRunner;
-
-import java.io.StringReader;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.connect4.input.InputProvider;
 
 public class GameRunnerTest {
 
     private GameRunner gameRunner;
+    private InputProvider inputProviderMock;
 
     @BeforeEach
     public void setUp() {
-        // A setUp metódus nem fog semmilyen mockolást végezni
+        inputProviderMock = mock(InputProvider.class); // Itt az InputProvider mockot hozunk létre
+        gameRunner = new GameRunner(inputProviderMock);
     }
 
     @Test
     public void testRunGame_LoadFromFile() {
-        // Szimuláljuk a felhasználói inputokat egy StringReader-rel
-        String input = "Igen\nfile-path.txt\n2\n"; // Fájl betöltése, majd oszlopválasztás
-        Scanner scanner = new Scanner(new StringReader(input));
-        gameRunner = new GameRunner(scanner);
+        // Mockoljuk a bemeneteket
+        when(inputProviderMock.nextLine()).thenReturn("Igen") // Az első bemenet "Igen"
+            .thenReturn("file-path.txt")  // A második bemenet a fájl elérési útja
+            .thenReturn("PlayerName")  // A harmadik bemenet a játékos neve
+            .thenReturn("a")  // Az oszlopválasztás
+            .thenReturn("b")  // Második oszlopválasztás
+            .thenReturn("c"); // Harmadik oszlopválasztás
 
-        // A runGame metódus meghívása
+        // A játékmenet lefuttatása
         gameRunner.runGame();
 
-        // Assert-ek vagy más logikai ellenőrzések itt szükségesek
-        assertTrue(true);  // Csak példa, a tényleges ellenőrzést hozzá kell adni
+        // Assert állítások
+        assertTrue(true); // Példa assert állítás
     }
 
     @Test
     public void testRunGame_NewGame() {
-        // Szimuláljuk, hogy a felhasználó nem szeretne fájlból betölteni
-        String input = "Nem\n2\n"; // Új játék, majd oszlopválasztás
-        Scanner scanner = new Scanner(new StringReader(input));
-        gameRunner = new GameRunner(scanner);
+        // Mockoljuk a bemeneteket
+        when(inputProviderMock.nextLine()).thenReturn("Nem") // Az első bemenet "Nem"
+            .thenReturn("PlayerName")  // A második bemenet a játékos neve
+            .thenReturn("a")  // Az oszlopválasztás
+            .thenReturn("b")  // Második oszlopválasztás
+            .thenReturn("c"); // Harmadik oszlopválasztás
 
-        // A runGame metódus meghívása
+        // A játékmenet lefuttatása
         gameRunner.runGame();
 
-        // Assert-ek vagy más logikai ellenőrzések itt szükségesek
-        assertTrue(true);  // Csak példa, a tényleges ellenőrzést hozzá kell adni
+        // Assert állítások
+        assertTrue(true); // Példa assert állítás
     }
 
     @Test
     public void testRunGame_PlayerMove() {
-        // Szimuláljuk, hogy a felhasználó új játékot szeretne és kiválaszt egy oszlopot
-        String input = "Nem\n2\n"; // Új játék, majd oszlopválasztás
-        Scanner scanner = new Scanner(new StringReader(input));
-        gameRunner = new GameRunner(scanner);
+        // Mockoljuk a bemeneteket
+        when(inputProviderMock.nextLine()).thenReturn("Nem") // Az első bemenet "Nem"
+            .thenReturn("PlayerName")  // A második bemenet a játékos neve
+            .thenReturn("a")  // Az oszlopválasztás
+            .thenReturn("b"); // Második oszlopválasztás
 
-        // A runGame metódus meghívása
+        // A játékmenet lefuttatása
         gameRunner.runGame();
 
-        // Assert-ek vagy más logikai ellenőrzések itt szükségesek
-        assertTrue(true);  // Csak példa, a tényleges ellenőrzést hozzá kell adni
+        // Assert állítások
+        assertTrue(true); // Példa assert állítás
     }
 }

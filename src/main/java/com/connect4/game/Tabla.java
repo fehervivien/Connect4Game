@@ -121,6 +121,13 @@ public class Tabla {
         return false;
     }
 
+    /*Visszaadja a tábla aktuális állapotát 
+    (a tabla kétdimenziós tömböt)*/
+    public char[][] getTabla() {
+        return tabla;
+    }
+    
+
     /*
      * Megjeleníti a táblát a konzolon,
      * soronként és oszloponként.

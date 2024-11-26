@@ -1,58 +1,58 @@
 <board>
   <row>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
     <cell>P</cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
+    <cell>S</cell>
   </row>
   <row>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell>S</cell>
+    <cell>S</cell>
+  </row>
+  <row>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell>S</cell>
+    <cell>S</cell>
+  </row>
+  <row>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell> </cell>
+    <cell>P</cell>
+    <cell>P</cell>
+  </row>
+  <row>
+    <cell>P</cell>
+    <cell> </cell>
     <cell>S</cell>
     <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-  </row>
-  <row>
-    <cell>P</cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-  </row>
-  <row>
-    <cell>P</cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-  </row>
-  <row>
     <cell>S</cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
+    <cell>S</cell>
   </row>
   <row>
     <cell>P</cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
+    <cell>P</cell>
+    <cell>P</cell>
+    <cell>P</cell>
+    <cell>S</cell>
+    <cell>P</cell>
   </row>
   <row>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
-    <cell> </cell>
+    <cell>P</cell>
+    <cell>P</cell>
+    <cell>P</cell>
+    <cell>S</cell>
+    <cell>S</cell>
+    <cell>S</cell>
   </row>
 </board>

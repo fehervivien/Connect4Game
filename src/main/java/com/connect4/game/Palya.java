@@ -2,11 +2,17 @@ package com.connect4.game;
 
 import java.io.*;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 /*
  * Pálya műveletek: betöltés, beolvasás, mentés
  */
 
-public class Palya {
+ public class Palya {
 
     private char[][] board;
     private final int rows = 7;
@@ -30,88 +36,77 @@ public class Palya {
         }
     }
 
-    /*
-     * Pálya betöltése
-     */
     public void loadBoard(String filePath) {
-        initializeBoard(); // Reset the board to empty before loading
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            int row = 0;
+        initializeBoard(); // A játéktábla alaphelyzetbe állítása a betöltés előtt
+        try {
+            // Xml fájl létrehozása a megadott elérési úttal
+            File xmlFile = new File(filePath); 
+
+            // Dokumentumépítő gyár létrehozása (az XML feldolgozásában segít)
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance(); 
+            // Dokumentumépítő létrehozása
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); 
+            // XML fájl beolvasása és dokumentum létrehozása
+            Document doc = dBuilder.parse(xmlFile); 
+            // A dokumentum normalizálása a struktúra tisztaságáért
+            doc.getDocumentElement().normalize(); 
     
-            while ((line = br.readLine()) != null) {
-                line = line.trim(); // Trim whitespace
-    
-                if (line.equals("<row>")) {
-                    // Sor kezdete
-                    continue; // Skip the opening <row> tag
-                }
-    
-                if (line.equals("</row>")) {
-                    // Sor befejezése
-                    row++; // Tovább lépünk a következő sorra
-                    continue; // Skip the closing </row> tag
-                }
-    
-                // Betölti a cellákat
-                if (line.startsWith("<cell>") && line.endsWith("</cell>")) {
-                    // Kinyeri a cella értékét
-                    
-                    char cellValue = line.charAt(6); // Az 7. karakter a cella értéke
-                    for (int col = 0; col < columns; col++) {
-                        // Az aktuális cellát a megfelelő oszlopba írja
-                        if (col == row) {
-                            board[row][col] = cellValue;
-                            
-                        }
-                        System.out.println("Olvasott sor: " + line);
-System.out.println("Betöltött cella: " + cellValue + " a(" + row + "," + col + ")");
-                    }
+            // Az összes <row> elem lekérése
+            NodeList rowList = doc.getElementsByTagName("row"); 
+            for (int row = 0; row < rowList.getLength(); row++) {
+                Element rowElement = (Element) rowList.item(row);
+
+                // Az aktuális sor celláinak lekérése
+                NodeList cellList = rowElement.getElementsByTagName("cell");
+                for (int col = 0; col < cellList.getLength(); col++) { 
+                    Element cellElement = (Element) cellList.item(col);
+
+                    // A cella szöveges tartalmának első karaktere
+                    char cellValue = cellElement.getTextContent().charAt(0); 
+                    // A játéktábla megfelelő cellájának értékének beállítása
+                    board[row][col] = cellValue; 
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Hiba a fájl beolvasása közben: " + e.getMessage());
-            initializeBoard(); // if there is an error, start with an empty board
+        } catch (Exception e) { // Hiba esetén
+            System.out.println("Hiba a fájl beolvasása közben: " + e.getMessage()); // Hibaüzenet kiírása
+            initializeBoard(); // A játéktábla alaphelyzetbe állítása
         }
-    
     }
     
 
-    /*
-     * Pálya mentése
-     */
     public void saveBoard(String filePath) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            // XML fájl kezdete
             bw.write("<board>\n");
-    
+
             for (int i = 0; i < rows; i++) {
-                bw.write("  <row>\n"); // Sor kezdete
+                bw.write("  <row>\n"); 
                 for (int j = 0; j < columns; j++) {
-                    bw.write("    <cell>" + board[i][j] + "</cell>\n"); // Cellák kiírása
+                    bw.write("    <cell>" + board[i][j] + "</cell>\n"); 
                 }
-                bw.write("  </row>\n"); // Sor vége
+                bw.write("  </row>\n");
             }
-    
-            // XML fájl vége
+
             bw.write("</board>\n");
+            System.out.println("A tábla sikeresen mentésre került: " + filePath);
         } catch (IOException e) {
             System.out.println("Hiba a fájl írása közben: " + e.getMessage());
             throw new RuntimeException("Hiba történt a pálya mentésekor.", e);
         }
     }
-    
 
     public char[][] getBoard() {
         return board;
     }
 
-    // Pálya állásának frissítése
-    public void updateBoard(int row, char symbol) {
-        if (row >= 0 && row < rows) {
-            // Az oszlopindexet is módosítsd, ha szükséges
-            board[row][0] = symbol; // Az első oszlopba írjuk
+    // Pálya állásának frissítése az adott oszlopban
+    public boolean updateBoard(int column, char symbol) {
+        for (int row = rows - 1; row >= 0; row--) {
+            if (board[row][column] == ' ') { // Ha az adott cella üres
+                board[row][column] = symbol;
+                return true;
+            }
         }
-    }
+        return false; // Ha az oszlop tele van
+}
 
 }

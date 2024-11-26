@@ -21,8 +21,13 @@ public class HighScore {
         return pontszam;
     }
 
+    public void addPontszam(int pontszam) {
+        this.pontszam += pontszam; // Növeli a pontszámot
+    }
+
     @Override
     public String toString() {
         return nev + ": " + pontszam;
     }
 }
+

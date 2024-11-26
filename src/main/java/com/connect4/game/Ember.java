@@ -1,5 +1,17 @@
-package com.connect4.game;
+/* Az Ember osztály egy emberi játékost 
+reprezentál. 
 
+A Scanner objektum segítségével beolvassa 
+a felhasználói bemeneteket a konzolról, 
+és a *lepes metódusban* kéri a felhasználót, 
+hogy válasszon egy oszlopot, ahová a következő 
+lépést szeretné tenni. 
+
+Az osztály a Jatekos osztályból származik, 
+és annak metódusait és mezőit örökli.*/
+
+
+package com.connect4.game;
 import java.util.Scanner;
 
 
