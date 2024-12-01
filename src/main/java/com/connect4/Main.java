@@ -1,6 +1,8 @@
 package com.connect4;
-import com.connect4.input.ConsoleInputProvider;
 import com.connect4.game.GameRunner;
+import com.connect4.input.ConsoleInputProvider;
+
+/* A program belépési pontja, itt indul a játék */
 
 public class Main {
     public static void main(String[] args) {

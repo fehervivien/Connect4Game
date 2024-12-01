@@ -1,11 +1,19 @@
-import org.junit.jupiter.api.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.connect4.highscore.HighScore;
 import com.connect4.highscore.HighScoreManager;
-
-import java.io.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class HighScoreManagerTest {
 
@@ -19,7 +27,7 @@ public class HighScoreManagerTest {
 
     @Test
     public void testBetoltHighScores() {
-        // Teszteljük, hogy a pontszámok betöltődnek a fájlból
+        // Teszteli, hogy a pontszámok betöltődnek a fájlból
         // A mock fájl létrehozása
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("highscores.txt"))) {
             bw.write("Jatekos1: 100\n");
@@ -56,7 +64,8 @@ public class HighScoreManagerTest {
             System.out.println("Név: " + hs.getNev() + ", Pontszám: " + hs.getPontszam());
         });
 
-        assertEquals("Jatekos2", highScoreManager.getHighScores().get(0).getNev()); // Első elem a legmagasabb pontszám
+        // Ellenőrizzük, hogy a pontszámok rendezve vannak-e
+        assertEquals("Jatekos2", highScoreManager.getHighScores().get(0).getNev());
         assertEquals(150, highScoreManager.getHighScores().get(0).getPontszam());
 
         // Az első játékos pontszámának növelése
@@ -74,8 +83,10 @@ public class HighScoreManagerTest {
 
         // Kimenet ellenőrzése
         highScoreManager.kiirHighScores();
-        // Itt nem tudunk közvetlen kimenetet ellenőrizni, de biztosítjuk, hogy ne
-        // dobjon kivételt
+        /*
+         * Itt nem lehet közvetlen kimenetet ellenőrizni, de biztosítom, hogy ne
+         * dobjon kivételt
+         */
         assertDoesNotThrow(() -> highScoreManager.kiirHighScores());
     }
 
@@ -84,22 +95,24 @@ public class HighScoreManagerTest {
         highScoreManager.mentesHighScore("Jatekos1", 100);
         highScoreManager.mentesHighScore("Jatekos2", 150);
 
+        // Ellenőrzi, hogy a keresett névvel rendelkező pontszámot megtalálja
         HighScore foundScore1 = highScoreManager.findHighScoreByName("Jatekos1");
         assertNotNull(foundScore1);
         assertEquals("Jatekos1", foundScore1.getNev());
         assertEquals(100, foundScore1.getPontszam());
 
+        // Ellenőrzi, hogy a másik játékos pontszámát is megtalálja
         HighScore foundScore2 = highScoreManager.findHighScoreByName("Jatekos2");
         assertNotNull(foundScore2);
         assertEquals("Jatekos2", foundScore2.getNev());
         assertEquals(150, foundScore2.getPontszam());
 
-        // Ellenőrizzük, hogy a keresés kis- és nagybetű független
+        // Ellenőrzi, hogy a keresés kis- és nagybetű független
         HighScore foundScore3 = highScoreManager.findHighScoreByName("jatekos1");
         assertNotNull(foundScore3);
         assertEquals("Jatekos1", foundScore3.getNev());
 
-        // Ellenőrizzük, hogy nem található név esetén null-t kapunk
+        // Ellenőrzi, hogy nem található név esetén null-t kapunk
         HighScore notFoundScore = highScoreManager.findHighScoreByName("Ismeretlen");
         assertNull(notFoundScore);
     }

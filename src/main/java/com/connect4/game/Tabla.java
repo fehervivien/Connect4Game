@@ -4,7 +4,8 @@ package com.connect4.game;
  * Tábla osztály:
  * Ez az osztály a tábla kezeléséért felel,
  * a lépések elhelyezésétől kezdve a győzelem ellenőrzéséig
- * és a tábla állapotának mentéséig. Felelős a játék alapvető mechanikájáért,
+ * és a tábla állapotának mentéséig. 
+ * Felelős a játék alapvető mechanikájáért,
  * mint a lépések megtétele, és a nyertes keresése.
 */
 
@@ -47,7 +48,7 @@ public class Tabla {
     }
 
     public int getMaxOszlop() {
-        return OSZLOPSZAM; // Ellenőrizd, hogy ez a szám mindig pozitív
+        return OSZLOPSZAM;
     }
 
     /*
@@ -68,7 +69,7 @@ public class Tabla {
         return false; // Az oszlop tele van
     }
 
-    /* Ellenőrzi, hogy a megadott játékos nyert-e. */
+    // Ellenőrzi, hogy a megadott játékos nyert-e.
     public boolean ellenorizGyoz(char jatekos) {
         return ellenorizGyozVizszintes(jatekos) || ellenorizGyozFuggoleges(jatekos) || ellenorizGyozAtlo(jatekos);
     }
@@ -89,6 +90,7 @@ public class Tabla {
         return false;
     }
 
+    // Függőleges győzelem ellenőrzése
     private boolean ellenorizGyozFuggoleges(char jatekos) {
         for (int i = 0; i < sorok - 3; i++) {
             for (int j = 0; j < oszlopok; j++) {
@@ -101,6 +103,7 @@ public class Tabla {
         return false;
     }
 
+    // Átlós győzelem ellenőrzése
     private boolean ellenorizGyozAtlo(char jatekos) {
         for (int i = 0; i < sorok - 3; i++) {
             for (int j = 0; j < oszlopok - 3; j++) {
@@ -121,41 +124,45 @@ public class Tabla {
         return false;
     }
 
-    /*Visszaadja a tábla aktuális állapotát 
-    (a tabla kétdimenziós tömböt)*/
+    /*
+     * Visszaadja a tábla aktuális állapotát
+     * (a tabla kétdimenziós tömböt)
+     */
     public char[][] getTabla() {
         return tabla;
     }
-    
 
     /*
      * Megjeleníti a táblát a konzolon,
      * soronként és oszloponként.
      */
     public void kiirTabla() {
-        // Kiírjuk a táblát
+        // Kiírja a táblát
         for (int i = 0; i < sorok; i++) {
             for (int j = 0; j < oszlopok; j++) {
-                System.out.print("|" + tabla[i][j]);  // Kiírjuk a táblát
+                System.out.print("|" + tabla[i][j]); // Kiírjuk a táblát
             }
-            System.out.print("| " + i);  // A sor számát a tábla végén írjuk ki
-            System.out.println();  // Új sor kezdése
+            // A sor számát a tábla végén írja ki
+            System.out.print("| " + i);
+            // Új sor kezdése
+            System.out.println();
         }
-    
+
         // Kiírjuk a táblázat elválasztó vonalát
         for (int j = 0; j < oszlopok; j++) {
-            System.out.print("--");  // Két kötőjelet írunk minden oszlop közé
+            // Két kötőjelet írunk minden oszlop közé
+            System.out.print("--");
         }
-        System.out.println("-");  // Az utolsó elválasztó vonal vége
-    
+        // Az utolsó elválasztó vonal vége
+        System.out.println("-");
+
         // Kiírjuk az oszlopok címkéit
-        //System.out.print("  ");  // Két üres hely a sorok számai előtt
         for (int j = 0; j < oszlopok; j++) {
-            System.out.print(" " + (char) ('a' + j));  // Kiírjuk az oszlop címkéit
+            System.out.print(" " + (char) ('a' + j)); // Kiírjuk az oszlop címkéit
         }
-        System.out.println();  // Új sor kezdése
+        // Új sor kezdése
+        System.out.println();
     }
-    
 
     /*
      * Visszaadja az oszlopok számát (érvényes oszlop),
@@ -165,14 +172,35 @@ public class Tabla {
         return oszlopok;
     }
 
+    // Visszaadja az oszlopok számát
     public int getOszlopokSzama() {
-        return oszlopok; // Visszatérünk az oszlopok számával
+        return oszlopok;
     }
 
+    // Visszaadja a sorok számát
     public boolean isValidMove(int oszlop) {
         if (oszlop < 0 || oszlop >= oszlopok) {
             return false; // Érvénytelen oszlop
         }
-        return tabla[0][oszlop] == ' '; // Ellenőrizzük, hogy az oszlop üres-e
+        return tabla[0][oszlop] == ' '; // Ellenőrzi, hogy az oszlop üres-e
     }
+
+    public boolean isFull() {
+        for (int col = 0; col < oszlopok; col++) {
+            if (!isColumnFull(col)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isColumnFull(int col) {
+        for (int row = 0; row < sorok; row++) {
+            if (tabla[row][col] == ' ') { // Ha üres cella van
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

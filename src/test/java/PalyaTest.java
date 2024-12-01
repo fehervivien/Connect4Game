@@ -1,13 +1,14 @@
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import com.connect4.game.Palya;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.connect4.game.Palya;
 
 class PalyaTest {
 
@@ -15,12 +16,13 @@ class PalyaTest {
 
     @BeforeEach
     void setUp() {
-        palya = new Palya(); // Új játéktábla létrehozása üres állapotban
+        // Új játéktábla létrehozása üres állapotban
+        palya = new Palya(); 
     }
 
     @Test
     void testInitializeBoard() {
-        // Ellenőrizzük, hogy a tábla üres-e
+        // Ellenőrzi, hogy a tábla üres-e
         char[][] board = palya.getBoard();
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
@@ -31,15 +33,18 @@ class PalyaTest {
 
     @Test
     void testUpdateBoard() {
-        // Ellenőrizzük, hogy a tábla frissítése megfelelően működik
-        assertTrue(palya.updateBoard(0, 'S')); // S betűvel való frissítés az 0-ás oszlopban
-        assertEquals('S', palya.getBoard()[6][0]); // Az alsó cellának S-nek kell lennie
+        // Ellenőrzi, hogy a tábla frissítése megfelelően működik
+        // S betűvel való frissítés az 0-ás oszlopban
+        assertTrue(palya.updateBoard(0, 'S')); 
+        // Az alsó cellának S-nek kell lennie
+        assertEquals('S', palya.getBoard()[6][0]);
 
-        // Töltsük fel az oszlopot
+        // Feltölti az oszlopot
         for (int i = 1; i < 7; i++) {
-            palya.updateBoard(0, 'P'); // P betűvel frissítjük
+            // P betűvel frissíti az oszlopot
+            palya.updateBoard(0, 'P'); 
         }
-        assertFalse(palya.updateBoard(0, 'S')); // Az oszlop már tele van, így false-t kell visszaadnia
+        assertFalse(palya.updateBoard(0, 'S'));
     }
 
     @Test
@@ -65,7 +70,7 @@ class PalyaTest {
         Palya palyaToLoad = new Palya("testBoard.xml");
         char[][] board = palyaToLoad.getBoard();
 
-        // Ellenőrizzük a betöltött tábla tartalmát
+        // Ellenőrzi a betöltött tábla tartalmát
         assertEquals('S', board[0][0]);
         assertEquals(' ', board[0][1]);
         assertEquals('P', board[0][2]);
@@ -73,15 +78,15 @@ class PalyaTest {
         assertEquals('S', board[1][1]);
         assertEquals(' ', board[1][2]);
 
-        // Töröljük a teszt fájlt
+        // Törli a teszt fájlt
         testFile.delete();
     }
 
     @Test
     void testLoadBoardInvalidFile() {
-        // Ellenőrizzük, hogy hiba történik-e, ha érvénytelen fájlt próbálunk betölteni
+        // Ellenőrzi, hogy hiba történik-e, ha érvénytelen fájlt próbálunk betölteni
         Palya palyaToLoad = new Palya("invalidFile.xml");
-        char[][] board = palyaToLoad.getBoard(); // Alapértelmezetten üres tábla kell, hogy legyen
+        char[][] board = palyaToLoad.getBoard(); 
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {

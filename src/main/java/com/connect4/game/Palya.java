@@ -1,9 +1,13 @@
 package com.connect4.game;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -13,21 +17,33 @@ import org.w3c.dom.NodeList;
  */
 
  public class Palya {
-
+    // A játék tábla
     private char[][] board;
+    // A tábla sorainak és oszlopainak száma
     private final int rows = 7;
     private final int columns = 6;
 
+    /*
+     * Alapértelmezett konstruktor: Inicializálja a táblát 
+     * és beállítja az alapértelmezett értékeket.
+     */
     public Palya() {
         this.board = new char[rows][columns];
         initializeBoard();
     }
 
+    /*
+     * Konstruktor: Betölti a táblát egy fájlból.
+     * @param filePath A fájl elérési útja, amelyből a tábla betöltésre kerül.
+     */
     public Palya(String filePath) {
         this.board = new char[rows][columns];
         loadBoard(filePath);
     }
 
+    /*
+     * Inicializálja a táblát alapértelmezett értékekkel (üres mezők).
+     */
     private void initializeBoard() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -37,17 +53,21 @@ import org.w3c.dom.NodeList;
     }
 
     public void loadBoard(String filePath) {
-        initializeBoard(); // A játéktábla alaphelyzetbe állítása a betöltés előtt
+        // A játéktábla alaphelyzetbe állítása a betöltés előtt
+        initializeBoard(); 
         try {
             // Xml fájl létrehozása a megadott elérési úttal
             File xmlFile = new File(filePath); 
 
             // Dokumentumépítő gyár létrehozása (az XML feldolgozásában segít)
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance(); 
+            
             // Dokumentumépítő létrehozása
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); 
+            
             // XML fájl beolvasása és dokumentum létrehozása
             Document doc = dBuilder.parse(xmlFile); 
+            
             // A dokumentum normalizálása a struktúra tisztaságáért
             doc.getDocumentElement().normalize(); 
     
@@ -67,13 +87,16 @@ import org.w3c.dom.NodeList;
                     board[row][col] = cellValue; 
                 }
             }
-        } catch (Exception e) { // Hiba esetén
-            System.out.println("Hiba a fájl beolvasása közben: " + e.getMessage()); // Hibaüzenet kiírása
-            initializeBoard(); // A játéktábla alaphelyzetbe állítása
+        // Hiba esetén
+        } catch (Exception e) { 
+            // Hibaüzenet kiírása
+            System.out.println("Hiba a fájl beolvasása közben: " + e.getMessage()); 
+            // A játéktábla alaphelyzetbe állítása
+            initializeBoard(); 
         }
     }
     
-
+    //Tábla mentése
     public void saveBoard(String filePath) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             bw.write("<board>\n");
@@ -94,6 +117,7 @@ import org.w3c.dom.NodeList;
         }
     }
 
+    // Pálya visszaadása
     public char[][] getBoard() {
         return board;
     }

@@ -1,13 +1,16 @@
 package com.connect4.highscore;
 
-/* HighScore osztály:
-- Tárolja a játékos nevét és pontszámát.
-- Kínál egy toString() metódust a könnyebb kiíratáshoz.*/
+/* 
+* HighScore osztály:
+    * Tárolja a játékos nevét és pontszámát.
+    * Kínál egy toString() metódust a könnyebb kiíratáshoz.
+*/
 
 public class HighScore {
     private String nev;
     private int pontszam;
 
+    // Konstruktor
     public HighScore(String nev, int pontszam) {
         this.nev = nev;
         this.pontszam = pontszam;
@@ -30,4 +33,3 @@ public class HighScore {
         return nev + ": " + pontszam;
     }
 }
-

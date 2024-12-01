@@ -1,22 +1,10 @@
 package com.connect4.game;
 
-import java.util.Random;
-import java.util.Scanner;
-
-/* A Jatekos absztrakt osztály + 2 konkrét osztály:
-Kétféle játékost valósít meg, egy Embert és egy Gépet
-illetve a játékosok lépéseit.
-
-- Jatekos absztrakt osztály:
-    Egy absztrakt osztály,amely meghatározza a közös
-     viselkedést (pl. a karakter és a lépés fogalma).
-- Ember osztály:
-    Egy emberi játékos osztály, amely jelenleg nincs teljesen implementálva
-    (a felhasználó választ oszlopot).
-- Gep osztály:
-    Egy gépi játékos, amely véletlenszerűen választja
-    ki az oszlopot, ahová a lépést megteszi.
-*/
+/*
+ * A Jatekos osztály egy játékost reprezentál a Connect4 játékban.
+ * Ez az osztály absztrakt, és minden játékosnak egyedi lépési
+ * logikát kell megvalósítania.
+ */
 
 public abstract class Jatekos {
     /*
@@ -40,7 +28,7 @@ public abstract class Jatekos {
      */
     public abstract int lepes(Tabla tabla);
 
-    /* Visszaadja a játékos karakterét. */
+    // Visszaadja a játékos karakterét.
     public char getJel() {
         return jel;
     }

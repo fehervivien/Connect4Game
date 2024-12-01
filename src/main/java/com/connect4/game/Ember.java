@@ -1,19 +1,19 @@
-/* Az Ember osztály egy emberi játékost 
-reprezentál. 
+/* 
+* Az Ember osztály egy emberi játékost 
+* reprezentál. 
 
-A Scanner objektum segítségével beolvassa 
-a felhasználói bemeneteket a konzolról, 
-és a *lepes metódusban* kéri a felhasználót, 
-hogy válasszon egy oszlopot, ahová a következő 
-lépést szeretné tenni. 
+* A Scanner objektum segítségével beolvassa 
+* a felhasználói bemeneteket a konzolról, 
+* és a *lepes metódusban* kéri a felhasználót, 
+* hogy válasszon egy oszlopot, ahová a következő 
+* lépést szeretné tenni. 
 
-Az osztály a Jatekos osztályból származik, 
-és annak metódusait és mezőit örökli.*/
-
+* Az osztály a Jatekos osztályból származik, 
+* és annak metódusait és mezőit örökli.*/
 
 package com.connect4.game;
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 public class Ember extends Jatekos {
     // Beolvasás a felhasználótól
@@ -29,9 +29,19 @@ public class Ember extends Jatekos {
         scanner = new Scanner(System.in);
     }
 
+    /*
+     * Kéri a felhasználót,
+     * hogy válasszon egy oszlopot, ahová a következő
+     * lépést szeretné tenni
+     */
     @Override
     public int lepes(Tabla tabla) {
-        int oszlop = -1;
+        /*
+         * Alapértelmezett érték, 
+         * az oszlop változó még nincs inicializálva 
+         * egy érvényes oszlopszámmal
+         */
+        int oszlop = -1; 
         boolean ervenyesLepes = false;
 
         /*
