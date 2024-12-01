@@ -1,17 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
+<!-- A projekt azonosítói -->
   <groupId>com.connect4</groupId>
   <artifactId>connect4-game</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+<!-- A projekt neve és URL-je -->
   <name>Connect4Game</name>
   <url>http://maven.apache.org</url>
 
   <properties>
+  <!-- A forráskód karakterkódolása -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- A használt Java verzió -->
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
@@ -19,6 +22,7 @@
   <build>
     <plugins>
       <plugin>
+      <!-- Maven Compiler Plugin: A forráskód fordításához használt plugin -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.10.1</version> <!-- vagy a legfrissebb verzió -->
@@ -27,11 +31,15 @@
           <target>11</target>
         </configuration>
       </plugin>
+      <!-- Maven Assembly Plugin: A projekt összeszereléséhez használt 
+      plugin, amely lehetővé teszi, hogy a projekt különböző összetevőit 
+      egyetlen archívumba (például JAR, ZIP vagy TAR fájlba) csomagoljuk -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
       </plugin>
+      <!-- JaCoCo Plugin: A kód lefedettség méréséhez használt plugin -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -68,6 +76,7 @@
   </build>
 
   <dependencies>
+  <!-- Mockito: A teszteléshez használt mock könyvtár -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -82,16 +91,18 @@
       <scope>test</scope>
     </dependency>
     
+    <!-- Logback: A naplózáshoz használt könyvtár -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.2.3</version>
     </dependency>
     
+    <!-- JUnit Jupiter: A teszteléshez használt könyvtár -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.8.2</version> <!-- vagy a legfrissebb verzió -->
+      <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
